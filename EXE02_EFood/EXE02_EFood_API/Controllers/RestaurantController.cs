@@ -106,6 +106,26 @@ namespace EXE02_EFood_API.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("search")]
+        public IActionResult SearchRestaurant(string keyword)
+        {
+            var restaurants = _restaurantRepository.GetAll();
+
+            // Perform the search based on the keyword
+            var searchResults = restaurants.Where(r =>
+                r.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                r.Address.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            if (searchResults.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(searchResults);
+        }
+
         [HttpGet("/api/restaurant/review")]
         public IActionResult ReviewOfRes()
         {
