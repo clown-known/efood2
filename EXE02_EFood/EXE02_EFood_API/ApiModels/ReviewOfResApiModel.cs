@@ -6,18 +6,12 @@ namespace EXE02_EFood_API.ApiModels
 {
     public class ReviewOfResApiModel
     {
-        public List<Review> review { get; set; }
-        public ReviewOfResApiModel()
-        {
-            review = new List<Review>();
-        }
-
-    }
-    public class Review
-    {
+        public int ReviewId { get; set; }
+        public string UserFullName { get; set; }
+        public string RestaurantName { get; set; }
         public int? Voting { get; set; }
         public string Comment { get; set; }
-        public TimeSpan? Time { get; set; }
+        public string Time { get; set; }
     }
 }
 
