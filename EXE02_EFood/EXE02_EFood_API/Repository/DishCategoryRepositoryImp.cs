@@ -31,7 +31,7 @@ namespace EXE02_EFood_API.Repository
         public List<int> GetDishCategories(int dishId)
         {
             var categoryIds = _context.DishCategories
-                .Where(dc => dc.DishId == dishId)
+                .Where(dc => dc.DishId == dishId && !dc.IsDeleted)
                 .Select(dc => dc.CategoryId)
                 .ToList();
 
@@ -41,7 +41,7 @@ namespace EXE02_EFood_API.Repository
         public List<int> GetDishesByCategory(int categoryId)
         {
             var dishIds = _context.DishCategories
-                .Where(dc => dc.CategoryId == categoryId)
+                .Where(dc => dc.CategoryId == categoryId&&!dc.IsDeleted)
                 .Select(dc => dc.DishId)
                 .ToList();
 
@@ -55,7 +55,8 @@ namespace EXE02_EFood_API.Repository
 
             if (existingDishCategory != null)
             {
-                _context.DishCategories.Remove(existingDishCategory);
+                existingDishCategory.IsDeleted = true;
+                _context.DishCategories.Update(existingDishCategory);
                 _context.SaveChanges();
             }
         }

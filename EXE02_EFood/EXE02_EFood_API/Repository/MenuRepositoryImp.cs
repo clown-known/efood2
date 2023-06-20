@@ -56,7 +56,8 @@ namespace EXE02_EFood_API.Repository
 
             if (existingMenu != null)
             {
-                _context.Menus.Remove(existingMenu);
+                existingMenu.IsDeleted = true;
+                _context.Menus.Update(existingMenu);
                 _context.SaveChanges();
             }
         }

@@ -35,7 +35,7 @@ namespace EXE02_EFood_API.Repository
 
         public Dish Get(int id)
         {
-            var dish = _context.Dishes.SingleOrDefault(d => d.DishId == id);
+            var dish = _context.Dishes.SingleOrDefault(d => d.DishId == id && !d.IsDeleted);
             return dish;
         }
 
@@ -70,7 +70,8 @@ namespace EXE02_EFood_API.Repository
 
             if (dish != null)
             {
-                _context.Dishes.Remove(dish);
+                dish.IsDeleted = true;
+                _context.Dishes.Update(dish);
                 _context.SaveChanges();
             }
         }

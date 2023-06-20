@@ -29,26 +29,25 @@ namespace EXE02_EFood_API.Controllers
             this.menuRepository = menuRepository;
         }
         [HttpGet]
-        public IActionResult Home(string dishid)
+        public IActionResult Home(string cate)
         {
             HomeApiModel result = new HomeApiModel();
-            if (dishid == null || dishid.Equals(""))
+            if (cate == null || cate.Equals(""))
                 result.res = restaurantRepository.GetAll();
             else
             {
-                int idd = Int32.Parse(dishid);
-                foreach (int d in dishCategoryRepository.GetDishCategories(idd))
+                int idd = Int32.Parse(cate);
+                foreach (int d in dishCategoryRepository.GetDishesByCategory(idd))
                 {
-                    var dis = dishRepository.Get(d).DishId;
-                    var resid = menuRepository.GetRes(dis);
+                    var resid = menuRepository.GetRes(d);
                     var res = restaurantRepository.Get(resid);
                     if(!result.res.Contains(res))
                         result.res.Add(res);
                 }
             }
-            foreach (Category cate in categoryRepository.GetAll())
+            foreach (Category c in categoryRepository.GetAll())
             {
-                result.cate.Add(new CateHome { id = cate.CategoryId, name = cate.CategoryName });
+                result.cate.Add(new CateHome { id = c.CategoryId, name = c.CategoryName });
             }
             return Ok(result);
         }

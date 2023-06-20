@@ -62,7 +62,8 @@ namespace EXE02_EFood_API.Repository
 
             if (category != null)
             {
-                _context.Categories.Remove(category);
+                category.IsDeleted = true;
+                _context.Categories.Update(category);
                 _context.SaveChanges();
             }
         }

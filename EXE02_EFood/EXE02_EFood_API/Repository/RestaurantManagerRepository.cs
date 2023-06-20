@@ -23,12 +23,12 @@ namespace EXE02_EFood_API.Repository
 
         public RestaurantManager Get(int id)
         {
-            return _context.RestaurantManagers.FirstOrDefault(rm => rm.ResManagerId == id);
+            return _context.RestaurantManagers.FirstOrDefault(rm => rm.ResManagerId == id && rm.IsDeleted!=true);
         }
 
         public List<RestaurantManager> GetAll()
         {
-            return _context.RestaurantManagers.ToList();
+            return _context.RestaurantManagers.Where(rm => rm.IsDeleted != true).ToList();
         }
 
         public void Update(RestaurantManager restaurantManager)
@@ -42,7 +42,8 @@ namespace EXE02_EFood_API.Repository
             var restaurantManager = _context.RestaurantManagers.FirstOrDefault(rm => rm.ResManagerId == id);
             if (restaurantManager != null)
             {
-                _context.RestaurantManagers.Remove(restaurantManager);
+                restaurantManager.IsDeleted = true;
+                _context.RestaurantManagers.Update(restaurantManager);
                 _context.SaveChanges();
             }
         }

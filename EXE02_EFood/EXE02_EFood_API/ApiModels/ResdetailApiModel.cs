@@ -7,9 +7,11 @@ namespace EXE02_EFood_API.ApiModels
     {
         public Restaurant resInfor { get; set; }
         public List<Dish> dishList { get; set; }
+        public List<Dish> menu { get; set; }
         public ResdetailApiModel()
         {
             dishList = new List<Dish>();
+            menu = new List<Dish>();
         }
     }
 }

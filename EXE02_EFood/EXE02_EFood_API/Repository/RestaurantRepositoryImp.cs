@@ -40,7 +40,7 @@ namespace EXE02_EFood_API.Repository
 
         public Restaurant Get(int id)
         {
-            var result = _context.Restaurants.SingleOrDefault(a => a.ResId == id);
+            var result = _context.Restaurants.SingleOrDefault(a => a.ResId == id &&a.IsDeleted != true);
             return result;
         }
         public List<Restaurant> GetAll()
@@ -79,7 +79,8 @@ namespace EXE02_EFood_API.Repository
             var acc = _context.Restaurants.SingleOrDefault(a => a.ResId == id);
             if (acc != null)
             {
-                _context.Restaurants.Remove(acc);
+                acc.IsDeleted = true;
+                _context.Restaurants.Update(acc);
                 _context.SaveChanges();
             }   
         }
