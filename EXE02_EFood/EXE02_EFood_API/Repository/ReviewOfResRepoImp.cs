@@ -26,7 +26,8 @@ namespace EXE02_EFood_API.Repository
             var review = _context.ReviewOfRes.SingleOrDefault(r => r.ReviewId == id);
             if (review != null)
             {
-                _context.ReviewOfRes.Remove(review);
+                review.IsDeleted = true;
+                _context.ReviewOfRes.Update(review);
                 _context.SaveChanges();
             }
         }
@@ -39,7 +40,7 @@ namespace EXE02_EFood_API.Repository
 
         public ReviewOfRe GetReviewById(int id)
         {
-            return _context.ReviewOfRes.Include(res => res.Res).Include(res => res.User).SingleOrDefault(res => res.ReviewId == id);
+            return _context.ReviewOfRes.Include(res => res.Res).Include(res => res.User).SingleOrDefault(res => res.ReviewId == id && res.IsDeleted!=true);
         }
 
         //Lay Review Bang restaurant Id
@@ -65,7 +66,7 @@ namespace EXE02_EFood_API.Repository
 
         public ReviewOfRe GetLastReview()
         {
-            return _context.ReviewOfRes.ToList().Last();
+            return _context.ReviewOfRes.Where(a=>a.IsDeleted!= true).ToList().Last();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace EXE02_EFood_API.Repository
 
         public PaymentMethod Get(int id)
         {
-            var paymentMethod = _context.PaymentMethods.SingleOrDefault(p => p.PaymentMethodId == id);
+            var paymentMethod = _context.PaymentMethods.SingleOrDefault(p => p.PaymentMethodId == id && !p.IsDeleted);
             return paymentMethod;
         }
 
@@ -66,7 +66,8 @@ namespace EXE02_EFood_API.Repository
 
             if (paymentMethod != null)
             {
-                _context.PaymentMethods.Remove(paymentMethod);
+                paymentMethod.IsDeleted = true;
+                _context.PaymentMethods.Update(paymentMethod);
                 _context.SaveChanges();
             }
         }

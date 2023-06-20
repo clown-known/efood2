@@ -21,9 +21,9 @@ namespace EXE02_EFood_API.Repository
                 Name = user.Name,
                 Avatar = user.Avatar,
                 Phone = user.Phone,
-                IsPremium = user.IsPremium,
+                IsPremium = false,
                 Status = user.Status,
-                IsDeleted = user.IsDeleted
+                IsDeleted = false
             };
 
             _context.Users.Add(newUser);
@@ -34,12 +34,12 @@ namespace EXE02_EFood_API.Repository
 
         public User Get(int id)
         {
-            var user = _context.Users.SingleOrDefault(u => u.UserId == id);
+            var user = _context.Users.SingleOrDefault(u => u.UserId == id && u.IsDeleted != true);
             return user;
         }
         public User GetByPhone(string phone)
         {
-            var user = _context.Users.SingleOrDefault(u => u.Phone.Equals(phone));
+            var user = _context.Users.SingleOrDefault(u => u.Phone.Equals(phone) && u.IsDeleted!=true);
             return user;
         }
 
@@ -73,7 +73,8 @@ namespace EXE02_EFood_API.Repository
 
             if (user != null)
             {
-                _context.Users.Remove(user);
+                user.IsDeleted = true;
+                _context.Users.Update(user);
                 _context.SaveChanges();
             }
         }

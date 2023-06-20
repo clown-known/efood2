@@ -22,7 +22,7 @@ namespace EXE02_EFood_API.Controllers
         private readonly IUserRepository _userRepository;
         private readonly IReviewOfResRepo _reviewOfResRepo;
 
-        public RestaurantController(IRestaurantRepository restaurantRepository,IMenuRepository menuRepository,IDishRepository dishRepository, IReviewOfResRepo reviewOfResRepo, IUserRepository userRepository)
+        public RestaurantController(IRestaurantRepository restaurantRepository, IMenuRepository menuRepository, IDishRepository dishRepository, IReviewOfResRepo reviewOfResRepo, IUserRepository userRepository)
         {
             _restaurantRepository = restaurantRepository;
             _menuRepository = menuRepository;
@@ -62,7 +62,7 @@ namespace EXE02_EFood_API.Controllers
             foreach (int item in menu)
             {
                 var dish = _dishRepository.Get(item);
-                resdetail.dishList.Add(dish);
+                resdetail.menu.Add(dish);
             }
             resdetail.resInfor = restaurant;
             return Ok(resdetail);
@@ -123,21 +123,27 @@ namespace EXE02_EFood_API.Controllers
             return NoContent();
         }
         [HttpGet("/api/restaurant/review/{resId}")]
-        public IActionResult GetReviewResById(int? resId)
+        public IActionResult GetReviewResById(string resId)
         {
-            if (resId == null)
+            if (resId == null || resId.Equals(""))
             {
                 return NotFound();
             }
-            var reviewReses = _reviewOfResRepo.GetReviewResById((int)resId);
-            if (reviewReses.Count == 0)
+            var reviewReses = _reviewOfResRepo.GetReviewResById(Int32.Parse(resId));
+            if (reviewReses == null || reviewReses.Count == 0)
             {
                 return NotFound();
             }
             List<ReviewOfResApiModel> results = new List<ReviewOfResApiModel>();
             foreach (var item in reviewReses)
             {
-                results.Add(new ReviewOfResApiModel { ReviewId = item.ReviewId, RestaurantName = item.Res.Name, Comment = item.Comment, Time = item.Time.Value.ToString(), UserFullName = item.User.Name, Voting = item.Voting });
+                results.Add(new ReviewOfResApiModel { 
+                    ReviewId = item.ReviewId, 
+                    RestaurantName = item.Res.Name, 
+                    Comment = item.Comment, 
+                    //Time = item.Time.Value.ToString(), 
+                    UserFullName = item.User.Name, 
+                    Voting = item.Voting });
             }
 
             return Ok(results);
