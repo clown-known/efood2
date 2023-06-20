@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EXE02_EFood_API", "EXE02_EFood_API\EXE02_EFood_API.csproj", "{0654CE17-0709-4BF5-9B0C-3DB8DE01536B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0654CE17-0709-4BF5-9B0C-3DB8DE01536B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0654CE17-0709-4BF5-9B0C-3DB8DE01536B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0654CE17-0709-4BF5-9B0C-3DB8DE01536B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0654CE17-0709-4BF5-9B0C-3DB8DE01536B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C3BBA17C-D692-4DD7-9E40-24BBBD3D9DB2}
+	EndGlobalSection
+EndGlobal
