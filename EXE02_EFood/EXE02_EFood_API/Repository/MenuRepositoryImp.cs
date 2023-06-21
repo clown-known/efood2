@@ -61,6 +61,10 @@ namespace EXE02_EFood_API.Repository
                 _context.SaveChanges();
             }
         }
+        public List<Menu> GetMenuItemsByRestaurantId(int resId)
+        {
+            return _context.Set<Menu>().Where(m => m.ResId == resId).ToList();
+        }
     }
 
 }

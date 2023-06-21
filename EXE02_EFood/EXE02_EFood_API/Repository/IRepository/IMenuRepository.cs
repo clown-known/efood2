@@ -9,5 +9,7 @@ namespace EXE02_EFood_API.Repository.IRepository
         public List<int> GetDishes(int resId);
         public int GetRes(int dishId);
         public void Delete(Menu menu);
+        public List<Menu> GetMenuItemsByRestaurantId(int resId);
+
     }
 }

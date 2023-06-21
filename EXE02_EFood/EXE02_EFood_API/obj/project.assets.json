@@ -7902,11 +7902,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\.Net2\\EFood_git\\E_Food\\efood2\\EXE02_EFood\\EXE02_EFood_API\\EXE02_EFood_API.csproj",
+      "projectUniqueName": "D:\\.Net2\\testdeploy\\efood2\\EXE02_EFood\\EXE02_EFood_API\\EXE02_EFood_API.csproj",
       "projectName": "EXE02_EFood_API",
-      "projectPath": "D:\\.Net2\\EFood_git\\E_Food\\efood2\\EXE02_EFood\\EXE02_EFood_API\\EXE02_EFood_API.csproj",
+      "projectPath": "D:\\.Net2\\testdeploy\\efood2\\EXE02_EFood\\EXE02_EFood_API\\EXE02_EFood_API.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\.Net2\\EFood_git\\E_Food\\efood2\\EXE02_EFood\\EXE02_EFood_API\\obj\\",
+      "outputPath": "D:\\.Net2\\testdeploy\\efood2\\EXE02_EFood\\EXE02_EFood_API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
