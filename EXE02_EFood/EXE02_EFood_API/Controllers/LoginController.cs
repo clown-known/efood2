@@ -59,7 +59,11 @@ namespace EXE02_EFood_API.Controllers
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
-            var acc = _accountRepository.GetAll().Where(a => a.Email.Equals(model.email) && a.Password.Equals(model.password)).FirstOrDefault();
+            var acc = _accountRepository.GetAll().FirstOrDefault(a => a.Email.Equals(model.email) && a.Password.Equals(model.password));
+            if(acc == null)
+            {
+                return Unauthorized();
+            }
             if (acc.Status != 1)
             {
                 return Unauthorized(new ResponseObject

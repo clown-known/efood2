@@ -46,14 +46,17 @@ namespace EXE02_EFood_API
             services.AddScoped<IReviewOfResRepo, ReviewOfResRepoImp>();
             services.AddScoped<IRestaurantManagerRepository, RestaurantManagerRepository>();
             services.AddScoped<IReviewOfDishRepository, ReviewOfDishRepositoryImp>();
+            services.AddScoped<IRestaurantManagerRepository, RestaurantManagerRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepositoryImp>();
+            services.AddScoped<IAccountPaymentRepository, AccountPaymentRepositoryImp>();
+            services.AddScoped<IPremiumRepository, PremiumRepositoryImp>();
+            services.AddScoped<IPremium_hisRepository, Premium_hisRepositoryImp>();
+            services.AddScoped<IUserNotifyRepository, UserNotifyRepositoryImp>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EXE02_EFood_API", Version = "v1" });
             });
-            //services.Configure<WebEncoderOptions>(options =>
-            //{
-            //    options.UrlEncoding = false;
-            //});
+
             //services.AddSwaggerGen();
             services.AddAutoMapper(typeof(Startup));
 
@@ -88,14 +91,7 @@ namespace EXE02_EFood_API
             {
                 endpoints.MapControllers();
             });
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllerRoute(
-            //        name: "RestaurantManagerController",
-            //        pattern: "RestaurantManagerController/{action}",
-            //        defaults: new { controller = "RestaurantManager", action = "Index" })
-            //        ;
-            //});
+
         }
     }
 }
