@@ -9,6 +9,7 @@ using EXE02_EFood_API.Models;
 using EXE02_EFood_API.Repository.IRepository;
 using AutoMapper;
 using EXE02_EFood_API.ApiModels;
+using System.Text;
 
 namespace EXE02_EFood_API.Controllers
 {
@@ -35,6 +36,14 @@ namespace EXE02_EFood_API.Controllers
         public IActionResult GetAllRestaurants()
         {
             var restaurants = _restaurantRepository.GetAll();
+            for(int i = 0;i<restaurants.Count;i++)
+            {
+                byte[] utf8Bytes = Encoding.UTF8.GetBytes(restaurants.ToArray()[i].Address);
+
+                // Converting bytes to string with UTF-8 encoding
+                string utf8String = Encoding.UTF8.GetString(utf8Bytes);
+                restaurants.ToArray()[i].Address = utf8String;
+            }
             return Ok(restaurants);
         }
 
@@ -106,6 +115,25 @@ namespace EXE02_EFood_API.Controllers
 
             return NoContent();
         }
+        [HttpGet("search/{keyword}")]
+        public IActionResult SearchRestaurant(string keyword)
+        {
+            var restaurants = _restaurantRepository.GetAll();
+
+            // Perform the search based on the keyword
+            var searchResults = restaurants.Where(r =>
+                r.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||
+                r.Address.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            if (searchResults.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(searchResults);
+        }
+
         [HttpGet("/api/restaurant/review")]
         public IActionResult ReviewOfRes()
         {

@@ -41,9 +41,10 @@ namespace EXE02_EFood_API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateDish(Dish dish)
+        public IActionResult CreateDish(Dish dish,int resid)
         {
             _dishRepository.Create(dish);
+
             return CreatedAtAction(nameof(GetDish), new { id = dish.DishId }, dish);
         }
 

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "efood-390411",
+  "private_key_id": "df20f907c9c9a635a0917e1bcae9f8660ce50c0e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCRE02vzzbV67Jv\nT/Co4Ox3+yDQG/uMgS41awV6K2zFw/AemmLlJSDHe5OMKVgC+lsi/MVbE8fPrNQ6\nbz+oBpj4jqK+iMnLrd5SnoErwoYsuVAVcafBk+7b3KHt6Yd0OexLzhaAoYBASTBN\n+tAr9QAxai+HmCaJCHINbFgt2+f7XrKEY0/a+/EgU/t2npK89DFpLagIJONQlLRG\nmjnEjVPgDGiGz9BIwXS1m7pzhjvA30Y8JtJ+AySMh63GfINWNlmSNR++r0PfIvPK\nPiAOtqoRP9M3SamnORijSIYzrjrV+Iu/gCyLl8yyoDVPV5WBMDZoGwjcPP4vswcG\n/OK9X11ZAgMBAAECggEAApwhSqdkqiaKWDxM7QzW1DW9WmEWfmmYhjd9qrv7QfeL\na1GFs++eDlinx966iZstZoy7lC7f6lmGm+KCd6heuiH+xYS6dKKVHFFjq4DdXxKa\nYThhNzdNFcF7XEdWO34LRTXY68l8ACwQ5WY8tn262ii54CuZjd+MBbfMQk7xdnEv\nvwuK2prVLn9KaIQ6tPh4ISKU8kEbolxd3CrUSwzLt/ISGuROuhib7MM6hci16P3B\nhV7bB/2L19WkoC1qA1ldcPQNCAYbYCxvH1/AzDqql81P2OWBfRGNTonSKiD7gsGo\nzY+myhMvBuhlH0FVV4RDQnsS2bGnU+IuFGeIO9ZaTQKBgQDGtSOMxgD6zQWO8e/a\nj5baBBnmozAkGPGv5cmd2bT+8bT5276V1X4mxXp6Cir/Ler2Hu4XGh4kjIyEEBQc\nJX6aH6bqjxQQgMvU9ermv1iBBYFh7bDDmN67q98lKCC+a70lGYZ72KcXO2QgWgWU\nSUDn4IVJfAgpDfe2tnRXrsw+mwKBgQC654FbsdGJQL9aicFYKTNpuE1HLxhhh/nS\nieumlUZ38hQcKm9Uayfw7J9YE4nE/5frjdT7Cy3GmBX8zhES/npYPXfYq8bB9s8h\negZSSMDHBGHNhhnKyioT/XawT0QsWXnQWCSbQx9ez0yT1wo4nrmBnJMR79bPJwy/\nJIokRdD5GwKBgQCrgrfPjyxTTdlJW4wysxN61GVizGIGFj2uHIHcrIfsMcaKj2A+\nRcsgPf2MDvCz1vdiPqo06Icx9tpmNtaUwMw4za8t8Bdac0D8bNK3HluO6aiWVSno\nei9t/1iY4rz4f1gACLsqdIMsq0euIOWF64CJZCLHnbYRcYvpeiyLbkW+lwKBgQCW\nFh9vlZxQnljLCIHlHLi3dZNAzVXDxCBd6/j6vTZoTVHOyFi8LoxVUH4oiRABzMmf\nEzbrHS/2INzPNF7LpOR0BXA+4rnpuhrcpBN9cgS0DBXJp50AllUx1kDAFfcFshg6\nsP08XKtNRCQXOAByNSt8JFKJfdI+aPo4Z8wykonb7wKBgQCck1GIar5xzMYBmnuy\n90/rKAi3pqI+bv6Efwv+vdeXB6F8BkqjW2Rg0/ndJ5ZiupVt6o0p6mBxVbHTC0rd\njhEjQVRF9alaG2Lv2EO4Xpfo+KcKkaJByNU+hRAGahaWE3BKORS4NC5QUslwKtSk\nFfSJD3Ivho1pN0nLxXCd+wvaRg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "efoodadmin@efood-390411.iam.gserviceaccount.com",
+  "client_id": "109047285803763924017",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/efoodadmin%40efood-390411.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
