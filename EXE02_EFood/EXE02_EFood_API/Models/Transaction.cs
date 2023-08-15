@@ -11,7 +11,7 @@ namespace EXE02_EFood_API.Models
         public int? PaymentMethodId { get; set; }
         public int? AccountId { get; set; }
         public int? Value { get; set; }
-        public TimeSpan? TimeTrans { get; set; }
+        public DateTime TimeTrans { get; set; }
         public bool IsSuccess { get; set; }
         public string Note { get; set; }
 

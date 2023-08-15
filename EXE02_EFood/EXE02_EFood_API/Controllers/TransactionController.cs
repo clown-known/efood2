@@ -5,6 +5,7 @@ using EXE02_EFood_API.Repository.IRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace EXE02_EFood_API.Controllers
 {
@@ -19,7 +20,7 @@ namespace EXE02_EFood_API.Controllers
         private readonly IUserRepository _userRepository;
 
 
-        public TransactionController(ITransactionRepository transactionRepository,IPremium_hisRepository premium_HisRepository, IPremiumRepository premiumRepository, IAccountRepository accountRepository, IUserRepository userRepository)
+        public TransactionController(ITransactionRepository transactionRepository, IPremium_hisRepository premium_HisRepository, IPremiumRepository premiumRepository, IAccountRepository accountRepository, IUserRepository userRepository)
         {
             _transactionRepository = transactionRepository;
             _premiumRepository = premiumRepository;
@@ -32,6 +33,12 @@ namespace EXE02_EFood_API.Controllers
         public IActionResult GetAllTransactions()
         {
             var transactions = _transactionRepository.GetAll();
+            return Ok(transactions);
+        }
+        [HttpGet("pending")]
+        public IActionResult GetPendingTransactions()
+        {
+            var transactions = _transactionRepository.GetAll().Where(a=>a.Note.EndsWith("pending"));
             return Ok(transactions);
         }
 
@@ -58,7 +65,7 @@ namespace EXE02_EFood_API.Controllers
             transaction.PaymentMethodId = trans.paymentMethodId;
             transaction.AccountId = trans.accountId;
             transaction.Value = trans.value;
-            transaction.TimeTrans = TimeSpan.Parse(DateTime.Now.ToString());
+            transaction.TimeTrans = DateTime.Now;
             transaction.IsSuccess = false;
             transaction.Note = "pending";
             _transactionRepository.Create(transaction);
@@ -104,32 +111,78 @@ namespace EXE02_EFood_API.Controllers
             }
             existingTransaction.IsSuccess = true;
             existingTransaction.Note = "done";
-
+            int accountid = existingTransaction.AccountId.Value;
+            int userid = _accountRepository.Get(accountid).UserId.Value;
             _transactionRepository.Update(existingTransaction);
             // end update transaction
-
-            // update premium
-            PremiumHi newp = new PremiumHi();
-            newp.TimeStart = TimeSpan.Parse(DateTime.Now.TimeOfDay.ToString());
-            foreach (Premium p in _premiumRepository.GetAll())
+            // update premium in user
+            var user = _userRepository.Get(userid);
+            if (user != null)
             {
-                if (p.Value == existingTransaction.Value)
+                if (user.IsPremium)
                 {
-                    newp.PremiumId = p.PremiumId;
-                    var time = p.Period;
-                    newp.TimeEnd = TimeSpan.Parse((DateTime.Now.AddMonths(Int32.Parse(time)).TimeOfDay).ToString());
+                    // update premium
+                    PremiumHi existPre = _premiumHisRepository.GetByUserId(userid).Where(p => p.TimeEnd > DateTime.Now).FirstOrDefault();
+                    if (existPre != null)
+                    {
+                        existPre.TimeStart = existPre.TimeStart;
+                        foreach (Premium p in _premiumRepository.GetAll())
+                        {
+                            if (p.Value == existingTransaction.Value)
+                            {
+                                var time = p.Period;
+                                existPre.TimeEnd = existPre.TimeEnd.Value.AddMonths(Int32.Parse(time));
+                            }
+                        }
+                    }
+                    existPre.Status = 1;
+                    existPre.UserId = userid;
+                    _premiumHisRepository.Update(existPre);
+                }
+                else
+                {
+                    user.IsPremium = true;
+                    _userRepository.Update(user);
+                    // update premium
+                    PremiumHi newp = new PremiumHi();
+                    newp.TimeStart = DateTime.Now;
+                    foreach (Premium p in _premiumRepository.GetAll())
+                    {
+                        if (p.Value == existingTransaction.Value)
+                        {
+                            newp.PremiumId = p.PremiumId;
+                            var time = p.Period;
+                            newp.TimeEnd = DateTime.Now.AddMonths(Int32.Parse(time));
+                        }
+                    }
+                    newp.Status = 1;
+                    newp.UserId = userid;
+                    _premiumHisRepository.Create(newp);
                 }
             }
-            newp.Status = 1;
-            newp.UserId = _accountRepository.Get(existingTransaction.AccountId.Value).UserId;
-            _premiumHisRepository.Update(newp);
+            
             // end update premium
 
-            // update premium in user
-            var user = _userRepository.Get(newp.UserId.Value);
-            if (user != null) user.IsPremium = true;
-            _userRepository.Update(user);
+          
 
+            return Ok();
+        }
+        [HttpPut("denied/{transid}")]
+        public IActionResult DeniedPremium(int transid)
+        {
+            // update transaction
+            var existingTransaction = _transactionRepository.Get(transid);
+            if (existingTransaction == null)
+            {
+                return NotFound(new ResponseObject
+                {
+                    Message = "Transaction not found",
+
+                });
+            }
+            existingTransaction.IsSuccess = false;
+            existingTransaction.Note = "denied";
+            _transactionRepository.Update(existingTransaction);
             return Ok();
         }
 

@@ -165,7 +165,6 @@ namespace EXE02_EFood_API.Controllers
                     UserFullName = item.User.Name, 
                     Voting = item.Voting });
             }
-
             return Ok(results);
         }
 

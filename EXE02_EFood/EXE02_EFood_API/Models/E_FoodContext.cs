@@ -289,7 +289,7 @@ namespace EXE02_EFood_API.Models
 
             modelBuilder.Entity<PremiumHi>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(a => new {a.PremiumId,a.UserId });
 
                 entity.ToTable("Premium_his");
 
@@ -442,7 +442,6 @@ namespace EXE02_EFood_API.Models
                 entity.ToTable("Transaction");
 
                 entity.Property(e => e.TransactionId)
-                    .ValueGeneratedNever()
                     .HasColumnName("Transaction_id");
 
                 entity.Property(e => e.AccountId).HasColumnName("Account_id");

@@ -9,8 +9,8 @@ namespace EXE02_EFood_API.Models
     {
         public int PremiumId { get; set; }
         public int? UserId { get; set; }
-        public TimeSpan? TimeStart { get; set; }
-        public TimeSpan? TimeEnd { get; set; }
+        public DateTime? TimeStart { get; set; }
+        public DateTime? TimeEnd { get; set; }
         public int? Status { get; set; }
 
         public virtual Premium Premium { get; set; }

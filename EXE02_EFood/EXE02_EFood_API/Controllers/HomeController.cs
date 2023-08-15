@@ -5,6 +5,7 @@ using EXE02_EFood_API.Repository.IRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace EXE02_EFood_API.Controllers
@@ -32,7 +33,7 @@ namespace EXE02_EFood_API.Controllers
         public IActionResult Home(string cate)
         {
             HomeApiModel result = new HomeApiModel();
-            if (cate == null || cate.Equals(""))
+            if (cate == null || cate.Equals("") || cate.Equals("0"))
                 result.res = restaurantRepository.GetAll();
             else
             {
@@ -45,9 +46,17 @@ namespace EXE02_EFood_API.Controllers
                         result.res.Add(res);
                 }
             }
+            result.cate.Add(new CateHome { name = "all" });
             foreach (Category c in categoryRepository.GetAll())
             {
                 result.cate.Add(new CateHome { id = c.CategoryId, name = c.CategoryName });
+            }
+            List<Dish> dishList = dishRepository.GetAll();
+            for(int i = 0; i <= 5; i++)
+            {
+                Random rnd = new Random();
+                int randIndex = rnd.Next(dishList.Count);
+                result.slider.Add(dishList[randIndex]);
             }
             return Ok(result);
         }

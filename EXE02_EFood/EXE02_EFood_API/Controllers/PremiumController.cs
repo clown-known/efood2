@@ -22,7 +22,12 @@ namespace EXE02_EFood_API.Controllers
             _transactionRepository = transactionRepository;
         }
 
-        [HttpGet]
+        [HttpGet("value")]
+        public IActionResult GetAllPremiums()
+        {
+            var premiumHis = _premiumRepository.GetAll();
+            return Ok(premiumHis);
+        }[HttpGet]
         public IActionResult GetAllPremiumHis()
         {
             var premiumHis = _premiumHisRepository.GetAll();
@@ -89,9 +94,9 @@ namespace EXE02_EFood_API.Controllers
                     Message = "Premium history not found",
                 });
             }
-            existingPremiumHis.TimeStart = TimeSpan.Parse(DateTime.Now.TimeOfDay.ToString()); 
+            existingPremiumHis.TimeStart = DateTime.Now; 
             var time = _premiumRepository.Get(id).Period;
-            existingPremiumHis.TimeEnd = TimeSpan.Parse((DateTime.Now.AddMonths(Int32.Parse(time)).TimeOfDay).ToString());
+            existingPremiumHis.TimeEnd = DateTime.Now.AddMonths(Int32.Parse(time));
             _premiumHisRepository.Update(existingPremiumHis);
             return NoContent();
         }

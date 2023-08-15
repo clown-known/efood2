@@ -19,8 +19,8 @@ namespace EXE02_EFood_API.Models
         public string District { get; set; }
         public string Address { get; set; }
         public string Image { get; set; }
-        public int? Price { get; set; }
-        public TimeSpan? OpenTime { get; set; }
+        public string Price { get; set; }
+        public string OpenTime { get; set; }
         public int? VoteRating { get; set; }
         public string Description { get; set; }
         public decimal? Lat { get; set; }

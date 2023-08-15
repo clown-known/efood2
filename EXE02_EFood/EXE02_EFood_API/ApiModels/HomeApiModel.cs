@@ -6,11 +6,13 @@ namespace EXE02_EFood_API.ApiModels
     public class HomeApiModel
     {
         public List<CateHome> cate { get; set; }
+        public List<Dish> slider { get; set; }
         public List<Restaurant> res { get; set; }
         public HomeApiModel()
         {
             cate = new List<CateHome>();
             res = new List<Restaurant>();
+            slider = new List<Dish>();
         }
         
     }

@@ -11,7 +11,7 @@ using EXE02_EFood_API.Repository;
 using EXE02_EFood_API.BusinessObject;
 using EXE02_EFood_API.Repository.IRepository;
 using System.Linq;
-using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
+
 
 namespace EXE02_EFood_API.Controllers
 {
@@ -115,7 +115,8 @@ namespace EXE02_EFood_API.Controllers
                 Password = model.Password,
                 Status = 1,
                 Role = "user",
-                UserId = user.UserId
+                UserId = user.UserId,
+                createDate = DateTime.Now,
             };
             _accountRepository.Create(account);
             return Ok("Account registered successfully.");

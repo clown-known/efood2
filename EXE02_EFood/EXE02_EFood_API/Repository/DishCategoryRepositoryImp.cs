@@ -41,7 +41,7 @@ namespace EXE02_EFood_API.Repository
         public List<int> GetDishesByCategory(int categoryId)
         {
             var dishIds = _context.DishCategories
-                .Where(dc => dc.CategoryId == categoryId&&!dc.IsDeleted)
+                .Where(dc => dc.CategoryId == categoryId)
                 .Select(dc => dc.DishId)
                 .ToList();
 

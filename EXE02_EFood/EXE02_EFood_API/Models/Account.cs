@@ -20,6 +20,7 @@ namespace EXE02_EFood_API.Models
         public string Role { get; set; }
         public int? UserId { get; set; }
         public int? ResManagerId { get; set; }
+        public DateTime? createDate { get; set; }
 
         public virtual RestaurantManager ResManager { get; set; }
         public virtual User User { get; set; }

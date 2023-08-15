@@ -3,6 +3,7 @@ using EXE02_EFood_API.Models;
 using EXE02_EFood_API.Repository.IRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 
 namespace EXE02_EFood_API.Controllers
@@ -43,6 +44,7 @@ namespace EXE02_EFood_API.Controllers
         [HttpPost]
         public IActionResult CreateAccount(Account account)
         {
+            account.createDate = DateTime.UtcNow;
             _accountRepository.Create(account);
             return CreatedAtAction(nameof(GetAccount), new { id = account.AccountId }, account);
         }
@@ -67,6 +69,33 @@ namespace EXE02_EFood_API.Controllers
             _accountRepository.Update(existingAccount);
 
             return NoContent();
+        }
+        [HttpPut("ChangePass/{id}")]
+        public IActionResult changePassword(int id, string newPass, string oldPass)
+        {
+            var existingAccount = _accountRepository.Get(id);
+            if (existingAccount == null)
+            {
+                return NotFound(new ResponseObject
+                {
+                    Message = "ID not found!"
+                });
+            }
+            if (!oldPass.Equals(existingAccount.Password))
+            {
+                return BadRequest(new ResponseObject
+                {
+                    Message = "wrong old password"
+                }) ;
+            }
+            existingAccount.Password = newPass;
+
+            _accountRepository.Update(existingAccount);
+
+            return Ok(new ResponseObject
+            {
+                Message = "success."
+            });
         }
 
         [HttpDelete("{id}")]
